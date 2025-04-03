@@ -36,8 +36,8 @@ function toggleTask(el) {
     }
   }
   
-  document.getElementById('addTaskBtn').addEventListener('click', () => {
-    const ul = document.getElementById('todoList');
+  document.querySelector('.addTaskBtn').addEventListener('click', () => {
+    const ul = document.querySelector('.todoList');
     const li = document.createElement('li');
   
     li.innerHTML = `
@@ -66,32 +66,53 @@ function toggleTask(el) {
     li.querySelector('.task-content').appendChild(editBtn);
     ul.appendChild(li);
   });
+
   
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#todoList li').forEach(li => {
-      const checkbox = li.querySelector('.checkbox');
-      const dateInput = li.querySelector('.task-date');
-  
-      if (checkbox) {
-        checkbox.addEventListener('click', function () {
-          toggleTask(this);
-        });
-      }
-  
-      if (dateInput) {
-        dateInput.addEventListener('change', function () {
-          formatDate(this);
-        });
-      }
-  
-      const editBtn = document.createElement('span');
-      editBtn.className = 'edit-btn';
-      editBtn.textContent = '✏️';
-      editBtn.addEventListener('click', function () {
-        toggleEdit(this);
+ window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.todoList li').forEach(li => {
+    const checkbox = li.querySelector('.checkbox');
+    const dateInput = li.querySelector('.task-date');
+
+    if (checkbox) {
+      checkbox.addEventListener('click', function () {
+        toggleTask(this);
       });
-  
-      li.querySelector('.task-content').appendChild(editBtn);
+    }
+
+    if (dateInput) {
+      dateInput.addEventListener('change', function () {
+        formatDate(this);
+      });
+    }
+
+    const editBtn = document.createElement('span');
+    editBtn.className = 'edit-btn';
+    editBtn.textContent = '✏️';
+    editBtn.addEventListener('click', function () {
+      toggleEdit(this);
     });
+
+    li.querySelector('.task-content').appendChild(editBtn);
   });
-  
+});
+
+
+/* REFERENCES:
+1. `querySelector` and DOM Selection
+(https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
+2. `addEventListener()`
+(https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)
+3. `classList` API
+(https://developer.mozilla.org/en-US/docs/Web/API/Element/classList)
+4. `closest()` method
+(https://developer.mozilla.org/en-US/docs/Web/API/Element/closest)
+5. `contenteditable` attribute
+(https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable)
+6. Date formatting with `Intl.DateTimeFormat`
+(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString)
+7. `DOMContentLoaded` event
+(https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event)
+8. Creating & Appending Elements
+(https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
+(https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)
+*/
